@@ -28,14 +28,32 @@ First, note that every point of the parametric equation is actually on the surfa
 \includegraphics[scale=.6]{pita_h=5_n=50.pdf}
 \end{center}
 
-Now to show that it is a pita form, we need to check that it comes from a smooth convex shape. To examine this we can look at 150 point approximations of the unfoldings of it along the edge for $h=3$, 5, and 7:
+Now that we know that its flat, we can flatten it out to check that it comes from a smooth convex shape. To do that, we will look at just one half of the figure (split by the line between the vertices) and come up with a polar parametric equation for it. We will use 1 parameter $t$ that runs from 0 to 1. Doing this we get:
+
+$$ r(t) = \sqrt{h^2(t-1)^2+ \sin (2\pi t)^2+ (1-\cos(2\pi t))^2}$$
+$$\theta(t) = \int_0^t \frac{\sqrt{h^2 + 4 \pi^2 - r'(x)}}{r(x)} dx$$
+
+Now to show that it is a pita form, we need to check that it comes from a smooth convex shape. To examine this we can look at the unfoldings for $h=3$, 5, and 7:
 \begin{center}
-\includegraphics[scale=.4]{unfold_h=3_n=150.pdf}
-\includegraphics[scale=.4]{unfold_h=5_n=150.pdf}
-\includegraphics[scale=.4]{unfold_h=7_n=150.pdf}
+\includegraphics[scale=.4]{unfold_h=3.pdf}
+\includegraphics[scale=.4]{unfold_h=5.pdf}
+\includegraphics[scale=.4]{unfold_h=7.pdf}
 \end{center}
 
-As you can see, it is clearly smooth and convex aside from the 2 points that form the vertices of the sewed surface. When $h=3$ those points have over $180^\circ$ of material around each of them making the unfolding concave and not smooth. Similarly when $h=7$ there is less than $180^\circ$ of material around each vertex causing the shape to be convex, but still not smooth. But by continuity, there is some $h^*$ in between 3 and 7 such that there is exactly $180^\circ$ of material around each vertex causing the shape to be smooth. We think that $h^*$ is around 5, but we don't know the precise value. So when $h=h*$ our figure is a pita-form.
+As you can see, it is clearly smooth and convex aside from the 2 points that form the vertices of the sewed surface. When $h=3$ those points have over $180^\circ$ of material around each of them making the unfolding concave and not smooth. Similarly when $h=7$ there is less than $180^\circ$ of material around each vertex causing the shape to be convex, but still not smooth. But by continuity, there is some $h^*$ in between 3 and 7 such that there is exactly $180^\circ$ of material around each vertex causing the shape to be smooth.
+
+Now to solve for $h^*$. Let's just look at the angle of the vertex at the origin (we know they must be the same). The portion of the angle above the $x$-axis is given by $\theta(1)$ because it is just the angle that our parametric curve ends at. The other portion of the angle can be found by looking at the sewed pita form. This is the angle between the vertical line connecting the 2 vertices and the curve. Because one of the bounding lines is vertical, the surface is locally vertical, so the angle will remain unchanged if we imagine our surface going downwards (in the negative $z$ direction) everywhere. This means that our modified surface is just a right triangle cuved in a cylindrical fashion. The triangle has a base of $2\pi$ and height $h$, so this portion of the angle is $\arctan \frac{2\pi}{h}$. So overall we have:
+
+$$\text{vertex\_angle}(h)= \theta(1)+\arctan \frac{2\pi}{h}$$
+
+Solving numerically for $h^*$:
+$$ \text{vertex\_angle}(h^*)= 180^\circ= \theta(1)+\arctan \frac{2\pi}{h^*}$$
+$$h^*\approx 4.55199394344572$$
+
+So our final smooth unfolding with $h=h^*$ is:
+\begin{center}
+\includegraphics[scale=.4]{unfold_h=h*.pdf}
+\end{center}
 
 \subsection{Is there a crease?}
 Getting back to our original question, did we actually construct a pita form without a crease?
